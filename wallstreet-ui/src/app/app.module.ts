@@ -25,7 +25,7 @@ import { routes } from './app.routing';
 
 import { AppComponent } from './app.component';
 
-import { AppState } from './reducers';
+import { AppState } from './store/reducers';
 
 @NgModule({
   declarations: [

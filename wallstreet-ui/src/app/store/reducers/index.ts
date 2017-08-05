@@ -4,20 +4,25 @@ import { storeFreeze } from 'ngrx-store-freeze';
 import { storeLogger } from 'ngrx-store-logger';
 import { routerReducer, RouterState } from '@ngrx/router-store';
 
-import * as fromUser from '../user/user.reducer';
+import * as fromUser from '../../user/user.reducer';
+import * as fromTicker from './ticker.reducer';
+import { createSelector } from 'reselect';
 
 const modules = {
-  'user': fromUser
+  'user': fromUser,
+  'ticker': fromTicker
 };
 
 export interface AppState {
   router: RouterState;
   user: fromUser.UserState;
+  ticker: fromTicker.State;
 }
 
 export const syncReducers = {
   router: routerReducer,
-  user: fromUser.userReducer
+  user: fromUser.userReducer,
+  ticker: fromTicker.reducer
 };
 
 const deepCombineReducers = (allReducers: any) => {
@@ -82,3 +87,6 @@ export function createNewRootReducer(reducer: any): ActionReducer<any> {
     return rootReducer(state, action, reducer);
   };
 }
+
+export function getTickerState (state: AppState) { return state.ticker };
+export const getTicker = createSelector(getTickerState, fromTicker.getTicker);

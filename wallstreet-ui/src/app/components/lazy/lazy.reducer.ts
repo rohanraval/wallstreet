@@ -1,6 +1,6 @@
 import { Store, ActionReducer, Action } from '@ngrx/store';
 
-import { AppState, createNewRootReducer } from './../../reducers/index';
+import { AppState, createNewRootReducer } from './../../store/reducers/index';
 
 import { LazyActions } from './lazy.actions';
 
