@@ -5,24 +5,24 @@ import { storeLogger } from 'ngrx-store-logger';
 import { routerReducer, RouterState } from '@ngrx/router-store';
 
 import * as fromUser from '../../user/user.reducer';
-import * as fromTicker from './ticker.reducer';
+import * as fromCompanyData from './companydata.reducer';
 import { createSelector } from 'reselect';
 
 const modules = {
   'user': fromUser,
-  'ticker': fromTicker
+  'companyData': fromCompanyData
 };
 
 export interface AppState {
   router: RouterState;
   user: fromUser.UserState;
-  ticker: fromTicker.State;
+  companyData: fromCompanyData.State;
 }
 
 export const syncReducers = {
   router: routerReducer,
   user: fromUser.userReducer,
-  ticker: fromTicker.reducer
+  companyData: fromCompanyData.reducer
 };
 
 const deepCombineReducers = (allReducers: any) => {
@@ -88,5 +88,6 @@ export function createNewRootReducer(reducer: any): ActionReducer<any> {
   };
 }
 
-export function getTickerState (state: AppState) { return state.ticker };
-export const getTicker = createSelector(getTickerState, fromTicker.getTicker);
+export function getCompanyDataState (state: AppState) { return state.companyData };
+export const getTicker = createSelector(getCompanyDataState, fromCompanyData.getTicker);
+export const getCompanyName = createSelector(getCompanyDataState, fromCompanyData.getCompanyName);

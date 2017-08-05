@@ -8,8 +8,8 @@ import { Store } from '@ngrx/store';
 import { UserActions } from '../../user/user.actions';
 import { User } from '../../user/user.model';
 import * as fromRoot from '../../store/reducers/index';
-import * as fromTickerActions from '../../store/actions/ticker.actions';
-
+import * as fromCompanyDataActions from '../../store/actions/companydata.actions';
+import * as fromUserActions from '../../user/user.actions';
 
 @Component({
   selector: 'my-dashboard',
@@ -20,14 +20,15 @@ import * as fromTickerActions from '../../store/actions/ticker.actions';
 export class DashboardComponent implements OnDestroy, OnInit {
   destroyed$: Subject<any> = new Subject<any>();
   ticker$: Observable<string>;
+  companyName$: Observable<string>;
   
   constructor(
-    private store: Store<AppState>
-  ) {
-  }
+    private store: Store<AppState>,
+  ) { }
 
   ngOnInit() {
     this.ticker$ = this.store.select(fromRoot.getTicker);
+    this.companyName$ = this.store.select(fromRoot.getCompanyName);
   }
 
   ngOnDestroy() {
@@ -35,6 +36,6 @@ export class DashboardComponent implements OnDestroy, OnInit {
   }
 
   tickerChange(ticker) {
-    this.store.dispatch( new fromTickerActions.SetTickerAction(ticker) );
+    this.store.dispatch( new fromCompanyDataActions.SetTickerAction(ticker) );
   }
 }
