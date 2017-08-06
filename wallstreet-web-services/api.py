@@ -11,25 +11,25 @@ CORS(app)
 
 class CompanyName_Meta(Resource):
     def get(self, ticker):
-        return dumps(scraper.getCompanyNameFromTicker(ticker)).replace('\"', "")
+        return dumps(scraper.getCompanyNameFromTicker(ticker)).replace("\"", "")
 
 class IncomeStatement_Meta(Resource):
     def get(self, ticker):
         #Perform scraping and return JSON data
         is_data = scraper.getIncomeStatement(ticker)
-        return dumps(is_data).replace('\"', "")
+        return dumps(is_data)
 
 class BalanceSheet_Meta(Resource):
     def get(self, ticker):
         #Perform scraping and return JSON data
         bs_data = scraper.getBalanceSheet(ticker)
-        return dumps(bs_data).replace('\"', "")
+        return dumps(bs_data)
 
 class CashFlow_Meta(Resource):
     def get(self, ticker):
         #Perform scraping and return JSON data
         cf_data = scraper.getCashFlowStatement(ticker)
-        return dumps(cf_data).replace('\"', "")
+        return dumps(cf_data)
  
 api.add_resource(CompanyName_Meta, '/<string:ticker>')
 api.add_resource(IncomeStatement_Meta, '/<string:ticker>/incomeStatement')

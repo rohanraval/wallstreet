@@ -1,8 +1,11 @@
 import { Action } from '@ngrx/store';
+import { Point } from '../models/point.model';
+import { Line } from '../models/line.model';
 
 export const SET_TICKER = '[UI Interaction] Set Ticker';
-export const GET_COMPANY_NAME = '[Service Result] Get Company Name';
-export const COMPANY_NOT_FOUND = '[Service Result] Company Not Found';
+export const SET_COMPANY_NAME = '[Service Result] Set Company Name';
+export const SET_COMPANY_DATA = '[Service Result] Set Company Data';
+export const COMPANY_DATA_ERROR = '[Service Result] Company Data Error';
 
 export class SetTickerAction implements Action {
   readonly type = SET_TICKER;
@@ -10,19 +13,26 @@ export class SetTickerAction implements Action {
   constructor(public payload: string) { }
 }
 
-export class GetCompanyNameAction implements Action {
-  readonly type = GET_COMPANY_NAME;
+export class SetCompanyNameAction implements Action {
+  readonly type = SET_COMPANY_NAME;
 
   constructor(public payload: string) { }
 }
 
-export class CompanyNotFoundAction implements Action {
-  readonly type = COMPANY_NOT_FOUND;
+export class SetCompanyDataAction implements Action {
+  readonly type = SET_COMPANY_DATA;
+
+  constructor(public payload: Line[]) { }
+}
+
+export class CompanyDataErrorAction implements Action {
+  readonly type = COMPANY_DATA_ERROR;
 
   constructor() { }
 }
 
 export type CompanyDataActions
   = SetTickerAction
-  | GetCompanyNameAction
-  | CompanyNotFoundAction;
+  | SetCompanyNameAction
+  | SetCompanyDataAction
+  | CompanyDataErrorAction;

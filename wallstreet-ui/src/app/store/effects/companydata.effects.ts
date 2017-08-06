@@ -26,9 +26,45 @@ export class CompanyDataEffects {
     .switchMap(q => {
       return this.companyDataService.getCompanyName(q)
         .map(result =>
-          new fromCompanyData.GetCompanyNameAction(result)
+          new fromCompanyData.SetCompanyNameAction(result)
         )
-        .catch(() => Observable.of(new fromCompanyData.CompanyNotFoundAction()));
+        .catch(() => Observable.of(new fromCompanyData.CompanyDataErrorAction()));
+    });
+  
+  @Effect() companyISData$: Observable<Action> = this.actions$
+    .ofType(fromCompanyData.SET_TICKER)
+    .debounceTime(500)
+    .map(toPayload)
+    .switchMap(q => {
+      return this.companyDataService.getFinancialData(q, 'incomeStatement')
+        .map(result =>
+          new fromCompanyData.SetCompanyDataAction(result)
+        )
+        .catch(() => Observable.of(new fromCompanyData.CompanyDataErrorAction()));
+    });
+
+  @Effect() companyBSData$: Observable<Action> = this.actions$
+    .ofType(fromCompanyData.SET_TICKER)
+    .debounceTime(500)
+    .map(toPayload)
+    .switchMap(q => {
+      return this.companyDataService.getFinancialData(q, 'balanceSheet')
+        .map(result =>
+          new fromCompanyData.SetCompanyDataAction(result)
+        )
+        .catch(() => Observable.of(new fromCompanyData.CompanyDataErrorAction()));
+    });
+
+  @Effect() companyCFData$: Observable<Action> = this.actions$
+    .ofType(fromCompanyData.SET_TICKER)
+    .debounceTime(500)
+    .map(toPayload)
+    .switchMap(q => {
+      return this.companyDataService.getFinancialData(q, 'cashFlow')
+        .map(result =>
+          new fromCompanyData.SetCompanyDataAction(result)
+        )
+        .catch(() => Observable.of(new fromCompanyData.CompanyDataErrorAction()));
     });
 
 }

@@ -1,14 +1,20 @@
 import { CompanyDataActions } from "../actions/companydata.actions";
 import * as fromCompanyData from "../actions/companydata.actions";
 
+import * as _ from 'lodash';
+import { Point } from '../models/point.model';
+import { Line } from '../models/line.model';
+
 export interface State {
   ticker: string;
-  companyName: string;
+  name: string;
+  data: Line[];
 };
 
 export const initialState: State = {
   ticker: '',
-  companyName: ''
+  name: '',
+  data: []
 };
 
 export function reducer(state = initialState, action: CompanyDataActions): State {
@@ -18,9 +24,18 @@ export function reducer(state = initialState, action: CompanyDataActions): State
          ticker: action.payload
       });
     }
-    case fromCompanyData.GET_COMPANY_NAME: {
+    case fromCompanyData.SET_COMPANY_NAME: {
       return Object.assign({}, state, {
-         companyName: action.payload
+         name: action.payload
+      });
+    }
+    case fromCompanyData.SET_COMPANY_DATA: {
+      let data = [].concat(state.data);
+      _.each(action.payload, function(line) {
+        data.push(line);
+      })
+      return Object.assign({}, state, {
+         data: data
       });
     }
 
@@ -31,4 +46,5 @@ export function reducer(state = initialState, action: CompanyDataActions): State
 }
 
 export const getTicker = (state: State) => state.ticker;
-export const getCompanyName = (state: State) => state.companyName;
+export const getCompanyName = (state: State) => state.name;
+export const getCompanyData = (state: State) => state.data;

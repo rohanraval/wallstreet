@@ -91,3 +91,4 @@ export function createNewRootReducer(reducer: any): ActionReducer<any> {
 export function getCompanyDataState (state: AppState) { return state.companyData };
 export const getTicker = createSelector(getCompanyDataState, fromCompanyData.getTicker);
 export const getCompanyName = createSelector(getCompanyDataState, fromCompanyData.getCompanyName);
+export const getCompanyData = createSelector(getCompanyDataState, fromCompanyData.getCompanyData);
