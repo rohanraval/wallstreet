@@ -3,6 +3,12 @@
 
 Gain powerful data-driven insights into any publicly-traded company's finances with this tool.
 
+### Overview
+
+![Image](/assets/ss3.png)
+![Image](/assets/ss2.png)
+![Image](/assets/ss1.png)
+
 ### Setup
 1. Clone the repo
 2. To setup the API, cd into the `wallstreet-web-services` dir and do the following:
