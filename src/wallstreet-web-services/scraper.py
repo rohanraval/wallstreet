@@ -86,8 +86,14 @@ def getBalanceSheet(ticker):
 	receivables = getDataDictFromHTML("Receivables", data)
 	inventories = getDataDictFromHTML("Inventories", data)
 	ppe_net = getDataDictFromHTML("\"Net property, plant and equipment\"", data)
+	eq_other = getDataDictFromHTML("Equity and other investments", data)
 	intangible = getDataDictFromHTML("Intangible assets", data)
 	total_liab = getDataDictFromHTML("Total liabilities", data)
+	stdebt = getDataDictFromHTML("Short-term debt", data)
+	ltdebt = getDataDictFromHTML("Long-term debt", data)
+	deferredrev = getDataDictFromHTML("Deferred revenues", data)
+	payables = getDataDictFromHTML("Accounts payable", data)
+
 
 	total_current_assets = getDataDictFromHTML("Total current assets", data)
 	if total_current_assets is None:
@@ -106,8 +112,13 @@ def getBalanceSheet(ticker):
 			"Inventories": inventories,
 			"Accts Receivable": receivables,
 			"Property, Plant, Equipment (net)": ppe_net,
+			"Equity + other investments": eq_other,
 			"Intangible Assets": intangible,
 			"Total Current Assets": total_current_assets,
+			"Short-Term Debt": stdebt,
+			"Long-Term Debt": ltdebt,
+			"Deferred Revenues": deferredrev,
+			"Accts Payable": payables,
 			"Total Current Liabilities": total_current_liab,
 			"Total Liabilities" : total_liab
 	}

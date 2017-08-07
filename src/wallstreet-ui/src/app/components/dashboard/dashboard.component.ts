@@ -38,8 +38,8 @@ export class DashboardComponent implements OnDestroy, OnInit {
     });
     this.growthMetrics = ['Revenue', 'Gross Profit', 'EBITDA', 'Net Income'];
     this.expenseMetrics = ['COGS', 'SG&A', 'R&D', 'Other Operating Expenses', 'Interest Expense'];
-    this.assetsMetrics = ['Total Cash', 'Accts Receivable', 'Inventories', 'Property, Plant, Equipment (net)', 'Intangible Assets'];
-    this.liabilitiesMetrics = ['Total Cash', 'Inventories', 'Total Current Assets', 'Total Current Liabilities'];
+    this.assetsMetrics = ['Total Cash', 'Accts Receivable', 'Inventories', 'Property, Plant, Equipment (net)', 'Equity + other investments', 'Intangible Assets'];
+    this.liabilitiesMetrics = ['Short-Term Debt', 'Accts Payable', 'Long-Term Debt', 'Deferred Revenues'];
   }
 
   ngOnDestroy() {
