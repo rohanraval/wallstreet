@@ -5,9 +5,9 @@ Gain powerful data-driven insights into any publicly-traded company's finances w
 
 ### Overview
 
-![Image](/assets/ss3.png)
-![Image](/assets/ss2.png)
-![Image](/assets/ss1.png)
+<img src="/assets/ss3.png" alt="Screenshot" style="height: 100px;"/>
+<img src="/assets/ss2.png" alt="Screenshot" style="height: 100px;"/>
+<img src="/assets/ss1.png" alt="Screenshot" style="height: 100px;"/>
 
 ### Setup
 1. Clone the repo
