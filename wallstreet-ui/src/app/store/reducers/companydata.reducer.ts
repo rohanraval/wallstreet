@@ -21,7 +21,9 @@ export function reducer(state = initialState, action: CompanyDataActions): State
   switch (action.type) {
     case fromCompanyData.SET_TICKER: {
       return Object.assign({}, state, {
-         ticker: action.payload
+         ticker: action.payload,
+         name: initialState.name,
+         data: initialState.data
       });
     }
     case fromCompanyData.SET_COMPANY_NAME: {

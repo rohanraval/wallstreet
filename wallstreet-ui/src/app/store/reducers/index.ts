@@ -6,23 +6,27 @@ import { routerReducer, RouterState } from '@ngrx/router-store';
 
 import * as fromUser from '../../user/user.reducer';
 import * as fromCompanyData from './companydata.reducer';
+import * as fromVisualizations from './visualizations.reducer';
 import { createSelector } from 'reselect';
 
 const modules = {
   'user': fromUser,
-  'companyData': fromCompanyData
+  'companyData': fromCompanyData,
+  'visualizations': fromVisualizations
 };
 
 export interface AppState {
   router: RouterState;
   user: fromUser.UserState;
   companyData: fromCompanyData.State;
+  visualizations: fromVisualizations.State;
 }
 
 export const syncReducers = {
   router: routerReducer,
   user: fromUser.userReducer,
-  companyData: fromCompanyData.reducer
+  companyData: fromCompanyData.reducer,
+  visualizations: fromVisualizations.reducer
 };
 
 const deepCombineReducers = (allReducers: any) => {
@@ -92,3 +96,6 @@ export function getCompanyDataState (state: AppState) { return state.companyData
 export const getTicker = createSelector(getCompanyDataState, fromCompanyData.getTicker);
 export const getCompanyName = createSelector(getCompanyDataState, fromCompanyData.getCompanyName);
 export const getCompanyData = createSelector(getCompanyDataState, fromCompanyData.getCompanyData);
+
+export function getVisualizationsState (state: AppState) { return state.visualizations };
+export const getYear = createSelector(getVisualizationsState, fromVisualizations.getYear);

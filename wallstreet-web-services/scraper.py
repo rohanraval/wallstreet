@@ -49,17 +49,26 @@ def getIncomeStatement(ticker):
 
  	revenues = getDataDictFromHTML("Revenue", data)
  	cogs = getDataDictFromHTML("Cost of revenue", data)
+	gross_profit = getDataDictFromHTML("Gross profit", data)
  	sga = getDataDictFromHTML("\"Sales, General and administrative\"", data)
+	rd = getDataDictFromHTML("Research and development", data)
+	other_opex = getDataDictFromHTML("Other operating expenses", data)
  	operating_income = getDataDictFromHTML("Operating income", data)
  	interest_expense = getDataDictFromHTML("Interest Expense", data)
  	ebitda = getDataDictFromHTML("EBITDA", data)
+	net_income = getDataDictFromHTML("Net income", data)
 
  	return { "Revenue" : revenues,
  			"COGS" : cogs,
+			"Gross Profit": gross_profit,
  			"SG&A" : sga,
+			"R&D" : rd, 
+			"Other Operating Expenses": other_opex,
  			"Operating Income" : operating_income,
  			"Interest Expense" : interest_expense,
- 			"EBITDA" : ebitda }
+ 			"EBITDA" : ebitda,
+			"Net Income": net_income
+	}
 
 """
 	- Inputs: Stock Ticker of the public company.
@@ -71,7 +80,13 @@ def getBalanceSheet(ticker):
 	url = "http://financials.morningstar.com/ajax/ReportProcess4CSV.html?t="+ticker+"&reportType=bs&period=12&dataType=A&order=asc&columnYear=10&number=3"
 	soup = BeautifulSoup(requests.get(url).text, "lxml")
 	data = soup.find("p").get_text()
+	#print data
 
+	total_cash = getDataDictFromHTML("Total cash", data)
+	receivables = getDataDictFromHTML("Receivables", data)
+	inventories = getDataDictFromHTML("Inventories", data)
+	ppe_net = getDataDictFromHTML("\"Net property, plant and equipment\"", data)
+	intangible = getDataDictFromHTML("Intangible assets", data)
 	total_liab = getDataDictFromHTML("Total liabilities", data)
 
 	total_current_assets = getDataDictFromHTML("Total current assets", data)
@@ -87,7 +102,15 @@ def getBalanceSheet(ticker):
 		working_capital[total_current_assets.keys()[i]] = total_current_assets[total_current_assets.keys()[i]] - total_current_liab[total_current_assets.keys()[i]]
 
 	return { "Working Capital" : working_capital,
-			"Total Liabilities" : total_liab }
+			"Total Cash": total_cash,
+			"Inventories": inventories,
+			"Accts Receivable": receivables,
+			"Property, Plant, Equipment (net)": ppe_net,
+			"Intangible Assets": intangible,
+			"Total Current Assets": total_current_assets,
+			"Total Current Liabilities": total_current_liab,
+			"Total Liabilities" : total_liab
+	}
 
 """
 	- Inputs: Stock Ticker of the public company.
@@ -120,7 +143,7 @@ def getFinancialData(ticker):
 	return financial_data
 
 
-############# MAIN METHOD #############
+# ############ MAIN METHOD #############
 # ticker = raw_input("enter ticker: ")
 
 # if ticker is not None or getCompanyNameFromTicker(ticker) is not None:

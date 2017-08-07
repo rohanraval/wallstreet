@@ -1,8 +1,48 @@
-<section>
+<section class="input">
   <md-input-container>
     <input mdInput placeholder="Ticker" (change)="tickerChange($event.target.value)">
   </md-input-container>
+  <md-select placeholder="Year" name="year" (change)="changeYear($event.value)">
+      <md-option *ngFor="let year of years" [value]="year">{{year}}</md-option>
+  </md-select>
 </section>
 <section>
-  <span>{{companyName$ | async}}</span>
+  <span><strong><h3>{{ companyName }}</h3></strong></span>
+</section>
+<section>
+  <md-tab-group>
+    <md-tab label="Growth Analysis">
+      <md-card>
+        <md-toolbar color="primary">Growth Analysis</md-toolbar>
+        <md-card-content>
+          <linechart [metrics]="growthMetrics"></linechart>
+        </md-card-content>
+      </md-card>
+    </md-tab>
+    <md-tab label="Expense Analysis">
+      <md-card>
+        <md-toolbar color="primary">Expense Analysis</md-toolbar>
+        <md-card-content>
+          <piechart [metrics]="expenseMetrics"></piechart>
+        </md-card-content>
+      </md-card>
+    </md-tab>
+    <md-tab label="Asset Analysis">
+      <md-card>
+        <md-toolbar color="primary">Asset Analysis</md-toolbar>
+        <md-card-content>
+          <barchart [metrics]="assetsMetrics"></barchart>
+        </md-card-content>
+      </md-card>
+    </md-tab>
+    <md-tab label="Liability Analysis">
+      <md-card>
+        <md-toolbar color="primary">Liability Analysis</md-toolbar>
+        <md-card-content>
+          <barchart [metrics]="liabilitiesMetrics"></barchart>
+        </md-card-content>
+      </md-card>
+    </md-tab>
+  </md-tab-group>
+
 </section>

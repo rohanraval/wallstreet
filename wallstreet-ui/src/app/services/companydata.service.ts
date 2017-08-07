@@ -49,6 +49,18 @@ export class CompanyDataService extends RequestBase {
     return lines;
   }
 
+  pointsByYear(lines:Line[], year:number): Point[] {
+    let allPoints:Point[] = [];
+    _.each(lines, function(line) {
+      _.each(line.points, function(point) {
+        if(point.year === year) {
+          allPoints.push(point);
+        }
+      });
+    });
+    return allPoints;
+  }
+
   handleError(error): Observable<any> {
     console.log("ERROR with status code: " + error.status);
     return Observable.throw(new Error(error));

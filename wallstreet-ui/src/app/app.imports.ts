@@ -14,7 +14,8 @@ import { rootReducer } from './store/reducers';
 import { StoreDevToolsModule } from './components/store-devtools/store-devtools.module';
 import { UserEffects } from './user/user.effects';
 import { CompanyDataEffects } from './store/effects/companydata.effects';
-import {JsonpModule} from '@angular/http';
+import {ChartModule} from 'primeng/primeng';
+
 
 const STORE_DEV_TOOLS_IMPORTS = [];
 if (ENV === 'development' && !AOT &&
@@ -30,9 +31,9 @@ if (ENV === 'development' && !AOT &&
 
 export const APP_IMPORTS = [
   BrowserAnimationsModule,
+  ChartModule,
   EffectsModule.run(UserEffects),
   EffectsModule.run(CompanyDataEffects),
-  JsonpModule,
   MaterialModule,
   ReactiveFormsModule,
   RouterStoreModule.connectRouter(),
