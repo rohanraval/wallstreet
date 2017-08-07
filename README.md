@@ -11,7 +11,7 @@ Gain powerful data-driven insights into any publicly-traded company's finances w
         * `pip install flask-restful`
     * `python api.py`
     * The API is now running on port `5000`
-3. In the `wallstreet-ui` dir, run `npm run build:dev` and then `npm start`
+3. In the `wallstreet-ui` dir, run `yarn` and then `yarn start` (or `npm start`)
     * The app is now running on port `3000`
 
 ### Rohan S Raval, 2017
